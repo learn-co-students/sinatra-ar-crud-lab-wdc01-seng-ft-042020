@@ -1,16 +1,18 @@
 <h1>Listing of all the articles</h1>
 
+<a href="/articles/new">Create a new article</a>
+<%unless @articles.nil? %>
+<ol>
+    <% @articles.each do |art| %>
+        <li>
+            <a href="/articles/<%= art.id %>">
+                <%= art.title %>
+            </a>
+        </li>
+    <% end %>
+</ol> 
+   <% end %>
 
 
-<! # <a href="/articles/new">Create a new article</a>
 
-# <ol>
-#     <% @article.each do |art| %>
-#         <li>
-#             <a href="/articles/<%= article.id %>">
-#                 <%= art.title %>
-#             </a>
-#         </li>
-#     <% end %>
-# </ol>
->
+
