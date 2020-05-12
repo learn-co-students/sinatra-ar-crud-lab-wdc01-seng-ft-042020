@@ -1,0 +1,13 @@
+<h1>Detail page for <%= @article.title %></h1>
+
+<div><%= @article.content %></div>
+
+
+
+<form action="/articles/<%= @article.id %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete this book">
+</form>
+
+<div><a href="/articles/<%= @article.id %>/edit">Edit this book</a></div>
+<div><a href="/books">Back to Index Page</a></div>
