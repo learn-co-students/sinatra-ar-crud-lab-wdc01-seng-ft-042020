@@ -3,9 +3,11 @@ require_relative '../../config/environment'
 
 class ApplicationController < Sinatra::Base
 
+    set :views, "app/views"
+    set :method_override, true
+
     configure do
         set :public_folder, 'public'
-        set :views, 'app/views'
     end
 
     get '/' do
@@ -27,6 +29,11 @@ class ApplicationController < Sinatra::Base
         erb :show
     end
 
+    get "/articles/:id/edit" do
+        @article = Article.find(params[:id])
+        erb :edit
+    end
+
     post '/articles' do
         title = params[:title]
         content = params[:content]
@@ -41,7 +48,13 @@ class ApplicationController < Sinatra::Base
         redirect '/articles'
     end
 
-
-
-
+    put "/articles/:id" do
+        article = Article.find(params[:id])
+        article.update(title: params[:title],
+                     content: params[:content])
+        redirect "/articles/#{article.id}"
     end
+
+
+
+end
