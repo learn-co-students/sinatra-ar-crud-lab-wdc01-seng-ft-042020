@@ -9,13 +9,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+   "Welcome!"
   end
 
   get '/articles' do 
     @articles = Article.all
-    erb :index 
-
+    erb :index
   end 
 
   get '/articles/new' do
@@ -31,12 +30,18 @@ class ApplicationController < Sinatra::Base
   post '/articles' do 
     title = params[:title]
     content = params[:content]
-    article = find_or_create_by(
+    article = Article.find_or_create_by(
       title: title,
-      content: content,
-    )
+      content: content)
     redirect "/articles/#{article.id}"
   end 
+
+  delete '/articles/:id' do
+    Article.delete(params[:id])
+    redirect '/articles'
+  end
+
+
 
   
 end
